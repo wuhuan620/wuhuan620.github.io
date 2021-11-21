@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>文章归档 | Gridea</title>
+<title>UMG系统 | Gridea</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,7 +18,11 @@
 
 
 
-    <meta name="description" content="温故而知新">
+    <meta name="description" content="不知道怎么写，先想到啥写啥吧；
+UI交互，从character里面绑定输入事件，set input Mode UI only; 将输入流传递给UI
+同时 UI的蓝图需要写明白 Event construct -&gt;set Focus;
+..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,60 +92,50 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          
+          <div class="post-detail">
+            <h2 class="post-title">UMG系统</h2>
+            <div class="post-date">2021-11-20</div>
+            
+            <div class="post-content" v-pre>
+              <p>不知道怎么写，先想到啥写啥吧；<br>
+UI交互，从character里面绑定输入事件，set input Mode UI only; 将输入流传递给UI<br>
+同时 UI的蓝图需要写明白 Event construct -&gt;set Focus;<br>
+UI-&gt;Details -&gt;Focusable 打开焦点<br>
+执行UI的On Key Down  函数；</p>
+<p>Character -&gt;Set Input Mode UI Only-&gt;Show Mouse Cursor-&gt;Is Valid-&gt;Create Widget-&gt;Add to Viewport<br>
+UI Widget: Function:Override -&gt;On Key Down (Get Key)(Get Key Display Name) -&gt; Switch On String-&gt;remove form parents-&gt;set Input mode game only-&gt;handle<br>
+事件分配器 好用的不谈；<br>
+UI 拖拽<br>
+拖放的UI ：Item_Slot<br>
+Function:On Mouse Button Down-&gt;Detect Drag if Pressed<br>
+检测到拖动后执行 拖动函数：On Drag Detected<br>
+再创建一个UI:Item_Slot_ForDrag<br>
+回到 Item_Slot 中，在On Drag Detected 函数中create 刚刚的dragUI<br>
+再创建一个 ：DragDropOperation  处理拖放操作的信息交互类<br>
+回到Item_Slot 中，在create widget后面衔接上 Create Drag  Drop Operation<br>
+Create Drag Drop Operation 中的Pivot指的是鼠标焦点位置<br>
+UI 蓝图里面写On Drop(pin:operation)-&gt;cast to  Item_Slot Drag Drop<br>
+因为 这个Operation 还没拿到Item_Slot的数据，所以需要对Operation进行配置；<br>
+添加变量：ItemSlot  引用，公开并且可编辑；<br>
+返回UI 蓝图，在On Drop 中-》cast to 一下，然后拿到Item_Slot -&gt;slot as Canvas slot ,set position ;</p>
+<p>按功能实现进行分章节</p>
 
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
+            </div>
             
-              <h2 class="year" data-aos="fade-in" data-aos-delay="500">2021</h2>
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/umg-ui-01-02/">
-                      <h2 class="post-title">
-                        UMG UI  01-02
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/sui-yuan-ji/">
-                      <h2 class="post-title">
-                        UI拖拽系统
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/umg-xi-tong/">
-                      <h2 class="post-title">
-                        UMG系统
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/111/">
-                      <h2 class="post-title">
-                        MakeDown
-                      </h2>
-                    </a>
-                  </article>
-                
-              
             
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wuhuan620.github.io/post/111/">
+                  <h3 class="post-title">
+                    MakeDown
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
           </div>
-
-          <div class="pagination-container">
-  
-  
-</div>
 
         </div>
       </div>

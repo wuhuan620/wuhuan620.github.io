@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>UI拖拽系统 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wuhuan620.github.io/favicon.ico?v=1637503731623">
+<link rel="stylesheet" href="https://wuhuan620.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="首先拆解UI拖拽的用户行为，点击-&gt;拖拽；
+
+新建一个Item_Slot 代表被拖拽的UI，在Function中重写鼠标点击事件：On Mouse Button Down . 这里的逻辑为，当获取到鼠标的点击事件后，执行拖动操作；
+
+..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://wuhuan620.github.io">
+        <img src="https://wuhuan620.github.io/images/avatar.png?v=1637503731623" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://wuhuan620.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">UI拖拽系统</h2>
+            <div class="post-date">2021-11-20</div>
+            
+            <div class="post-content" v-pre>
+              <p>首先拆解UI拖拽的用户行为，点击-&gt;拖拽；</p>
+<ol>
+<li>新建一个Item_Slot 代表被拖拽的UI，在Function中重写鼠标点击事件：On Mouse Button Down . 这里的逻辑为，当获取到鼠标的点击事件后，执行拖动操作；</li>
+</ol>
+ <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637467636406.png" />
+</div>
+2. Item_Slot:Function一栏中重写：On Drag Detected 函数；
+3. 创建一个新的用来显示拖动的UI命名为Item_Slot_ForDrag；
+4. 新建一个用来处理拖放UI信息交互的DragDrop_Operation类，回到On Drag Detected函数中create 新建的UI，并链接DragDrop_Operation,如图 ；
+ <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637468331552.png" />
+</div>
+5. UI:Function一栏中重写：On Drop函数  (思考为什么Drop的函数并没有卸载Item_Slot里面),这里的DragDrop_Operation 暂且没有进行数据交互；
+6. 在Item_Slot_DragDrop_Operation中进行创建变量Item_Slot的对象引用打开可编辑，设置成public；  (更改完Operation后对Item_Slot的Drag进行赋值)
+ <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637469358140.png" />
+</div>
+7. 做好准备工作了，确定好逻辑转化成Operation后拿到Item_Slot,接下来设置它的位置信息![]  <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637469221605.png" />
+</div>
+8. Item_Slot 需要将自己的图像和文本控件进行公开且可编辑，再同样给Drag_Item_Slot做同样的操作，回到Item_Slot:On Drag Detected中 将变量进行传输。回到Drag中进行绑定控件，即可完成；
+-> 一个随意拖动的UI就实现了
+---
+升级版，指定区域内进行拖拽和交互
+ 1. 新建一个Test_Image的widget，打开Operation 添加一个变量并公开；
+ 2. 从Item_Slot中将自己的Image传给Operation；
+ 3. 回到Test_Image当中，调用Function:On Drop ,转化成operation，get Image
+<div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637474594418.png" />
+</div>
+4. 即使给Item_Slot 设置它的Brush，在编辑器模式下依旧是不能看到图像信息的，我们需要在Item_Slot的时间中编写如下逻辑；
+<div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637474790229.png" />
+</div>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wuhuan620.github.io/post/umg-xi-tong/">
+                  <h3 class="post-title">
+                    UMG系统
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

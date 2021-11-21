@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wuhuan620.github.io</id>
     <title>Gridea</title>
-    <updated>2021-11-19T16:17:43.423Z</updated>
+    <updated>2021-11-21T14:08:57.365Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wuhuan620.github.io"/>
     <link rel="self" href="https://wuhuan620.github.io/atom.xml"/>
@@ -11,44 +11,110 @@
     <icon>https://wuhuan620.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[111]]></title>
+        <title type="html"><![CDATA[UMG UI  01-02]]></title>
+        <id>https://wuhuan620.github.io/post/umg-ui-01-02/</id>
+        <link href="https://wuhuan620.github.io/post/umg-ui-01-02/">
+        </link>
+        <updated>2021-11-21T12:05:50.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>用Mspaint工具截取图片保存为PNG格式并重新导入Textures文件夹中；</li>
+<li>创建UMG的Widget，GamesHUD(主状态显示UI),InventorySlot(单独的物品栏位),PickupText(待定)；</li>
+<li>回到Character类中，创建三个浮点型的变量，分别为体力，精力，心情，无所谓是啥得东西；</li>
+<li>在显示准信的HUD中，新建一个布尔类型的变量并做if else;</li>
+<li>创建一个Interface,接口类，添加函数，UseAction和DropAction;添加输入 Item To Drop;</li>
+<li>添加一个结构体，增加变量，Item，ItemImage,PickupText,ActionText</li>
+</ol>
+<hr>
+<ol>
+<li>回到GameHUD中对 显示进行构建，就不详细描述了</li>
+<li>在GameHUD的Widget中拿到PlayerCharacter,用cast to转化完以后提升为变量；</li>
+<li>对三个Progress的值进行帧绑定（后续应该会改动来节省开销）；</li>
+<li>在Character中创建GAMEHUD</li>
+<li>对jump进行侯秀设置，让其能更改精力值；</li>
+</ol>
+<hr>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[UI拖拽系统]]></title>
+        <id>https://wuhuan620.github.io/post/sui-yuan-ji/</id>
+        <link href="https://wuhuan620.github.io/post/sui-yuan-ji/">
+        </link>
+        <updated>2021-11-20T10:54:43.000Z</updated>
+        <content type="html"><![CDATA[<p>首先拆解UI拖拽的用户行为，点击-&gt;拖拽；</p>
+<ol>
+<li>新建一个Item_Slot 代表被拖拽的UI，在Function中重写鼠标点击事件：On Mouse Button Down . 这里的逻辑为，当获取到鼠标的点击事件后，执行拖动操作；</li>
+</ol>
+ <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637467636406.png" />
+</div>
+2. Item_Slot:Function一栏中重写：On Drag Detected 函数；
+3. 创建一个新的用来显示拖动的UI命名为Item_Slot_ForDrag；
+4. 新建一个用来处理拖放UI信息交互的DragDrop_Operation类，回到On Drag Detected函数中create 新建的UI，并链接DragDrop_Operation,如图 ；
+ <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637468331552.png" />
+</div>
+5. UI:Function一栏中重写：On Drop函数  (思考为什么Drop的函数并没有卸载Item_Slot里面),这里的DragDrop_Operation 暂且没有进行数据交互；
+6. 在Item_Slot_DragDrop_Operation中进行创建变量Item_Slot的对象引用打开可编辑，设置成public；  (更改完Operation后对Item_Slot的Drag进行赋值)
+ <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637469358140.png" />
+</div>
+7. 做好准备工作了，确定好逻辑转化成Operation后拿到Item_Slot,接下来设置它的位置信息![]  <div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637469221605.png" />
+</div>
+8. Item_Slot 需要将自己的图像和文本控件进行公开且可编辑，再同样给Drag_Item_Slot做同样的操作，回到Item_Slot:On Drag Detected中 将变量进行传输。回到Drag中进行绑定控件，即可完成；
+-> 一个随意拖动的UI就实现了
+---
+升级版，指定区域内进行拖拽和交互
+ 1. 新建一个Test_Image的widget，打开Operation 添加一个变量并公开；
+ 2. 从Item_Slot中将自己的Image传给Operation；
+ 3. 回到Test_Image当中，调用Function:On Drop ,转化成operation，get Image
+<div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637474594418.png" />
+</div>
+4. 即使给Item_Slot 设置它的Brush，在编辑器模式下依旧是不能看到图像信息的，我们需要在Item_Slot的时间中编写如下逻辑；
+<div align=center>
+<img src="file://C:/Users/yzcbrc/Documents/Gridea/post-images/1637474790229.png" />
+</div>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[UMG系统]]></title>
+        <id>https://wuhuan620.github.io/post/umg-xi-tong/</id>
+        <link href="https://wuhuan620.github.io/post/umg-xi-tong/">
+        </link>
+        <updated>2021-11-20T08:23:45.000Z</updated>
+        <content type="html"><![CDATA[<p>不知道怎么写，先想到啥写啥吧；<br>
+UI交互，从character里面绑定输入事件，set input Mode UI only; 将输入流传递给UI<br>
+同时 UI的蓝图需要写明白 Event construct -&gt;set Focus;<br>
+UI-&gt;Details -&gt;Focusable 打开焦点<br>
+执行UI的On Key Down  函数；</p>
+<p>Character -&gt;Set Input Mode UI Only-&gt;Show Mouse Cursor-&gt;Is Valid-&gt;Create Widget-&gt;Add to Viewport<br>
+UI Widget: Function:Override -&gt;On Key Down (Get Key)(Get Key Display Name) -&gt; Switch On String-&gt;remove form parents-&gt;set Input mode game only-&gt;handle<br>
+事件分配器 好用的不谈；<br>
+UI 拖拽<br>
+拖放的UI ：Item_Slot<br>
+Function:On Mouse Button Down-&gt;Detect Drag if Pressed<br>
+检测到拖动后执行 拖动函数：On Drag Detected<br>
+再创建一个UI:Item_Slot_ForDrag<br>
+回到 Item_Slot 中，在On Drag Detected 函数中create 刚刚的dragUI<br>
+再创建一个 ：DragDropOperation  处理拖放操作的信息交互类<br>
+回到Item_Slot 中，在create widget后面衔接上 Create Drag  Drop Operation<br>
+Create Drag Drop Operation 中的Pivot指的是鼠标焦点位置<br>
+UI 蓝图里面写On Drop(pin:operation)-&gt;cast to  Item_Slot Drag Drop<br>
+因为 这个Operation 还没拿到Item_Slot的数据，所以需要对Operation进行配置；<br>
+添加变量：ItemSlot  引用，公开并且可编辑；<br>
+返回UI 蓝图，在On Drop 中-》cast to 一下，然后拿到Item_Slot -&gt;slot as Canvas slot ,set position ;</p>
+<p>按功能实现进行分章节</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MakeDown]]></title>
         <id>https://wuhuan620.github.io/post/111/</id>
         <link href="https://wuhuan620.github.io/post/111/">
         </link>
         <updated>2021-11-19T16:08:43.000Z</updated>
-        <content type="html"><![CDATA[<p>1111111111111111111111111</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://wuhuan620.github.io/post/hello-gridea/</id>
-        <link href="https://wuhuan620.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <content type="html"><![CDATA[<p>https://zhuanlan.zhihu.com/p/429339951</p>
 ]]></content>
     </entry>
 </feed>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>文章归档 | Gridea</title>
+<title>UMG UI  01-02 | Gridea</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,7 +18,11 @@
 
 
 
-    <meta name="description" content="温故而知新">
+    <meta name="description" content="
+用Mspaint工具截取图片保存为PNG格式并重新导入Textures文件夹中；
+创建UMG的Widget，GamesHUD(主状态显示UI),InventorySlot(单独的物品栏位),PickupText(待定)；
+回到Charac..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -88,60 +92,45 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          
+          <div class="post-detail">
+            <h2 class="post-title">UMG UI  01-02</h2>
+            <div class="post-date">2021-11-21</div>
+            
+            <div class="post-content" v-pre>
+              <ol>
+<li>用Mspaint工具截取图片保存为PNG格式并重新导入Textures文件夹中；</li>
+<li>创建UMG的Widget，GamesHUD(主状态显示UI),InventorySlot(单独的物品栏位),PickupText(待定)；</li>
+<li>回到Character类中，创建三个浮点型的变量，分别为体力，精力，心情，无所谓是啥得东西；</li>
+<li>在显示准信的HUD中，新建一个布尔类型的变量并做if else;</li>
+<li>创建一个Interface,接口类，添加函数，UseAction和DropAction;添加输入 Item To Drop;</li>
+<li>添加一个结构体，增加变量，Item，ItemImage,PickupText,ActionText</li>
+</ol>
+<hr>
+<ol>
+<li>回到GameHUD中对 显示进行构建，就不详细描述了</li>
+<li>在GameHUD的Widget中拿到PlayerCharacter,用cast to转化完以后提升为变量；</li>
+<li>对三个Progress的值进行帧绑定（后续应该会改动来节省开销）；</li>
+<li>在Character中创建GAMEHUD</li>
+<li>对jump进行侯秀设置，让其能更改精力值；</li>
+</ol>
+<hr>
 
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
+            </div>
             
-              <h2 class="year" data-aos="fade-in" data-aos-delay="500">2021</h2>
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/umg-ui-01-02/">
-                      <h2 class="post-title">
-                        UMG UI  01-02
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/sui-yuan-ji/">
-                      <h2 class="post-title">
-                        UI拖拽系统
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/umg-xi-tong/">
-                      <h2 class="post-title">
-                        UMG系统
-                      </h2>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://wuhuan620.github.io/post/111/">
-                      <h2 class="post-title">
-                        MakeDown
-                      </h2>
-                    </a>
-                  </article>
-                
-              
             
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://wuhuan620.github.io/post/sui-yuan-ji/">
+                  <h3 class="post-title">
+                    UI拖拽系统
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
           </div>
-
-          <div class="pagination-container">
-  
-  
-</div>
 
         </div>
       </div>
